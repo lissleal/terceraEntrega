@@ -39,8 +39,9 @@ body {
 
         .divFormularios{
             display: grid;
-        grid-template-columns:1fr;
-        gap: 20px;
+            grid-template-columns:1fr;
+            gap: 20px;
+            
             .formulario {
                 background-color: bisque;
                 display: flex;
@@ -49,24 +50,20 @@ body {
                 padding: 20px;
                 border-radius: 10px;
 
-
-                    .inputMenu {
-                        border-radius: 5px;
-                        height: 30px;
-                        width: 100px;
-                        background-color: white;
-                        font-family: 'Poppins', sans-serif;
-
-                    }
-                    .boton {
-                        background-color: rgb(18, 121, 71);
-                        color: white;
-                        border-radius: 5px;
-                        padding: 5px;
-                        font-family: 'Poppins', sans-serif;
-
-                    }
-
+                .inputMenu {
+                    border-radius: 5px;
+                    height: 30px;
+                    width: 100px;
+                    background-color: white;
+                    font-family: 'Poppins', sans-serif;
+                }
+                .boton {
+                    background-color: rgb(18, 121, 71);
+                    color: white;
+                    border-radius: 5px;
+                    padding: 5px;
+                    font-family: 'Poppins', sans-serif;
+                }
             }
         }
         .divCategorias {
@@ -76,31 +73,29 @@ body {
 
             .divCategoria {
                 border-radius: 5px;
+                display: flex;
+                flex-direction: column;
+                width: 630px;
 
                 h3 {
                     background-color: antiquewhite;
                     padding: 10px;
                     font-family: 'Architects Daughter', cursive;
-
                 }
-                display: flex;
-                flex-direction: column;
-                width: 630px;
                 .lista {
                     display: flex;
                     flex-direction: column;
                     background-color: white;
                     padding: 10px;
+
                     .productito {
                         display: flex;
                         justify-content: space-around;
-
                         p {
                             font-family: 'Poppins', sans-serif;
                             text-align: center;
                         }
                     }
-
                 }
             }
         }
