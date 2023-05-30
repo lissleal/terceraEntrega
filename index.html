@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <title>Tercera Pre Entrega | Lissett Leal</title>
+</head>
+<body>
+    <header>
+        <h1>Lista de Compras</h1>
+    </header>
+        <!-- MENU -->
+    <main class="main">
+        <div class="divFormularios">
+            <form id="formulario" class="formulario">
+                <input class="inputMenu" type="text" id="inputNombre" placeholder="Nombre">
+                <input class="inputMenu" type="number" min="0" id="inputPrecio" placeholder="Precio">
+                <input class="inputMenu" type="number" min="0" id="inputCantidad" placeholder="Cantidad">
+                <input class="inputMenu" type="text" id="inputCategoria" placeholder="Categoria">
+                <input type="submit" id="botonCategoria" for="formulario" value="Agregar Producto" class="boton">
+            </form>
+
+            <form id="eliminar" class="formulario">
+                <input class="inputMenu" type="text" id="inputNombreEliminar" placeholder="Nombre">
+                <input class="inputMenu" type="text" id="inputCategoriaEliminar" placeholder="Categoria">
+                <input type="submit" id="eliminarProducto" for="eliminar" value="Eliminar Producto" class="boton">
+            </form>
+            <form id="sumarSeleccionados" class="formulario">
+                <input type="submit" id="botonEliminar" for="eliminarProducto" value="Vaciar Lista" class="boton">
+            </form>
+            <form id="sumarTotal" class="formulario">
+                <h3>Costo Total</h3>
+                <p>$ </p><p id="montoTotal"> </p>
+
+            </form>
+            
+        </div>
+
+        
+        <!-- CATEGORIAS -->
+
+        <form id="divCategorias" class="divCategorias" > 
+            
+        </form>
+    </main>
+    <script src="./main.js"></script>
+</body>
+</html>

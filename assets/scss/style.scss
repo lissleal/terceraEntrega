@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Poppins:wght@300&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;  
+
+}
+
+body {
+    background-color: aquamarine;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif;
+
+    h1 {
+        color: black;
+        background-color: white;
+        border-radius: 5px;
+        padding: 10px 50px;
+        text-align: center;
+        border: 2px solid black;
+        font-family: 'Architects Daughter', cursive;
+    }
+    .main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+        gap: 20px;
+
+        .divFormularios{
+            display: grid;
+        grid-template-columns:1fr;
+        gap: 20px;
+            .formulario {
+                background-color: bisque;
+                display: flex;
+                gap: 15px;
+                justify-content: center;
+                padding: 20px;
+                border-radius: 10px;
+
+
+                    .inputMenu {
+                        border-radius: 5px;
+                        height: 30px;
+                        width: 100px;
+                        background-color: white;
+                        font-family: 'Poppins', sans-serif;
+
+                    }
+                    .boton {
+                        background-color: rgb(18, 121, 71);
+                        color: white;
+                        border-radius: 5px;
+                        padding: 5px;
+                        font-family: 'Poppins', sans-serif;
+
+                    }
+
+            }
+        }
+        .divCategorias {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+
+            .divCategoria {
+                border-radius: 5px;
+
+                h3 {
+                    background-color: antiquewhite;
+                    padding: 10px;
+                    font-family: 'Architects Daughter', cursive;
+
+                }
+                display: flex;
+                flex-direction: column;
+                width: 630px;
+                .lista {
+                    display: flex;
+                    flex-direction: column;
+                    background-color: white;
+                    padding: 10px;
+                    .productito {
+                        display: flex;
+                        justify-content: space-around;
+
+                        p {
+                            font-family: 'Poppins', sans-serif;
+                            text-align: center;
+                        }
+                    }
+
+                }
+            }
+        }
+    }
+}
+
