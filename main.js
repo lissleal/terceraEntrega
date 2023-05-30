@@ -24,10 +24,11 @@ let arrayCategorias = [];
 
 /******Vinculo HTML con JS *******/
 const divCategorias = document.getElementById("divCategorias");
-let montoTotal = document.getElementById("montoTotal");
+const montoTotal = document.getElementById("montoTotal");
 const formulario = document.getElementById("formulario");
+const formularioEliminar = document.getElementById("formularioEliminar");
 const botonEliminarProducto = document.getElementById("eliminarProducto");
-let botonEliminar = document.getElementById("botonEliminar");
+const botonEliminar = document.getElementById("botonEliminar");
 
 //Asigno Evento para recoger datos
 formulario.addEventListener("submit", agregarProducto);
@@ -45,24 +46,24 @@ totalLista();
 
 /******* FUNCIONES*******/
 
-function revisarStorage(){
 //Iniciar variables segun storage
-
-// || productosTraidosDeStorage.length > 0
-
+function revisarStorage(){
   if (productosTraidosDeStorage !== null ) {
     arrayProductos = productosTraidosDeStorage;
   }
 }
+
 //Actualizo storage
 function actualizarStorage(){
-  let productosParaEnviarStorageEnJson = JSON.stringify(arrayProductos);
+  const productosParaEnviarStorageEnJson = JSON.stringify(arrayProductos);
   localStorage.setItem("productos", productosParaEnviarStorageEnJson);
 }
 
 //Calculo total a pagar
 function totalLista(){
-  const nuevoMonto = arrayProductos.reduce((acumulador, elemento) => acumulador + parseInt(elemento.cantidad * elemento.precio), 0);
+  const nuevoMonto = arrayProductos.reduce(
+    (acumulador, elemento) => 
+    acumulador + elemento.cantidad * elemento.precio, 0);
   montoTotal.innerText = nuevoMonto;
 }
 
@@ -90,12 +91,7 @@ function agregarProducto (e) {
   }
 
   //Creo nuevo producto
-  const nuevoProducto = new Producto (
-      nombre,
-      precio,
-      cantidad,
-      categoria,
-  );
+  const nuevoProducto = new Producto (nombre, precio, cantidad, categoria);
 
   //Lo agrego a mi array
   arrayProductos.push(nuevoProducto);
@@ -110,55 +106,53 @@ function agregarProducto (e) {
 
 //Creo un array para las categorias filtrando el array productos
 function filtrarCategorias () {
-    for (let i= 0; i < arrayProductos.length; i++ ) {
-        let nuevaCategoria = arrayProductos[i].categoria;
-        //Reviso si existe la categoria
-        let validar = arrayCategorias.find(categoria => categoria.nombre == nuevaCategoria); 
 
-        //Si no existe la agrego al array de categorias y agrego el producto
-        if (validar === undefined){          
-            const productosCategoria = arrayProductos.filter((producto) => 
-                        producto.categoria == nuevaCategoria);
-            let categoria = new Categoria (nuevaCategoria);
-            categoria.productos = productosCategoria;
-            arrayCategorias.push(categoria);
-        }else{        //Si existe agrego el producto a su categoria
-
-            const producto = arrayProductos[i];            
-            validar.productos = validar.productos.filter((p) => p.nombre !== producto.nombre);
-            validar.productos.push(producto); 
-        }  
+    arrayCategorias = [];
+    arrayProductos.forEach((producto) => {
+    const categoriaExistente = arrayCategorias.find((categoria) => 
+    categoria.nombre === producto.categoria);
+    
+    if (categoriaExistente) {
+      categoriaExistente.productos.push(producto);
+    } else {
+      const nuevaCategoria = new Categoria(producto.categoria);
+      nuevaCategoria.productos.push(producto);
+      arrayCategorias.push(nuevaCategoria);
     }
+  });
 }
 
 //Creo en html los div de categorias segun arraycategorias
 function crearDivCategorias() { 
   // Reiniciar valores
   filtrarCategorias();
-  divCategorias.innerHTML = `<div class="divCategoria"><h3>Categoria</h3>
-  <ul class="lista"> 
-      <li class="productito">
-          <p class="">Nombre</p>
-          <p class="">Precio</p>
-          <p class="">Cantidad</p>
-      </li>
-  </ul></div>`;
+
+  //Creo Titulo
+  divCategorias.innerHTML = `
+                            <div class="divCategoria">
+                              <h3>Categoria</h3>
+                              <ul class="lista"> 
+                                  <li class="productito">
+                                      <p class="">Nombre</p>
+                                      <p class="">Precio</p>
+                                      <p class="">Cantidad</p>
+                                  </li>
+                              </ul>
+                            </div>`;
 
   // Crear divs
-  if (arrayCategorias != []){
     for (const categoria of arrayCategorias) {
       const div = document.createElement("div");
       div.className = "divCategoria";
       div.innerHTML = `
-        <h3>${categoria.nombre}</h3>
-        <ul class="lista">
-          ${generarProductosHTML(categoria.productos)}
-        </ul>
-      `;
+                    <h3>${categoria.nombre}</h3>
+                    <ul class="lista">
+                      ${generarProductosHTML(categoria.productos)}
+                    </ul>
+                  `;
       divCategorias.appendChild(div);
     }
   }
-}
 
 //Crea Inner Html para alimentar los div de categorias
 function generarProductosHTML(productos) {
@@ -183,9 +177,10 @@ function eliminarProducto(e){
   const inputNombreEliminar = document.getElementById("inputNombreEliminar").value.toUpperCase();
   const inputCategoriaEliminar = document.getElementById("inputCategoriaEliminar").value.toUpperCase();
 
+  let indiceProducto = -1;
   do{
     //Busco index del producto
-    let indiceProducto = arrayProductos.findIndex((producto) =>
+    indiceProducto = arrayProductos.findIndex((producto) =>
         producto.nombre === inputNombreEliminar ||
         producto.categoria === inputCategoriaEliminar);
 
@@ -196,6 +191,7 @@ function eliminarProducto(e){
       crearDivCategorias();
       } 
     }while(indiceProducto != -1);
+    formularioEliminar.reset();
 }
 
 
